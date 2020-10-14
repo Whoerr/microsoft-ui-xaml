@@ -66,6 +66,7 @@ void ExpanderAutomationPeer::Expand()
     if (auto const expander = Owner().try_as<winrt::Expander>())
     {
         expander.IsExpanded(true);
+        RaiseExpandCollapseAutomationEvent(winrt::ExpandCollapseState::Expanded);
     }   
 }
 
@@ -89,6 +90,7 @@ void ExpanderAutomationPeer::Collapse()
     if (auto const expander = Owner().try_as<winrt::Expander>())
     {
         expander.IsExpanded(false);
+        RaiseExpandCollapseAutomationEvent(winrt::ExpandCollapseState::Collapsed);
     }
 }
 

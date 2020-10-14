@@ -78,7 +78,7 @@ void Expander::RaiseCollapsedEvent(const winrt::Expander& container)
 void Expander::OnIsExpandedPropertyChanged(const winrt::DependencyPropertyChangedEventArgs& args)
 {
     bool shouldExpand = unbox_value<bool>(args.NewValue());
-
+    
     if (shouldExpand)
     {
         winrt::VisualStateManager::GoToState(*this, L"Expanded", true);
@@ -94,10 +94,9 @@ void Expander::OnIsExpandedPropertyChanged(const winrt::DependencyPropertyChange
     {
         auto expanderPeer = peer.as<ExpanderAutomationPeer>();
         expanderPeer->RaiseExpandCollapseAutomationEvent(
-            IsExpanded() ?
+            shouldExpand ?
             winrt::ExpandCollapseState::Expanded :
-            winrt::ExpandCollapseState::Collapsed
-        );
+            winrt::ExpandCollapseState::Collapsed);
     }
 }
 
