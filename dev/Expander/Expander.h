@@ -24,9 +24,6 @@ public:
     // IFrameworkElement
     void OnApplyTemplate();
 
-    // IControlOverrides overrides
-    void OnKeyDown(winrt::KeyRoutedEventArgs const& e);
-
     void RaiseExpandingEvent(const winrt::Expander& container);
     void RaiseCollapsedEvent(const winrt::Expander& container);
 

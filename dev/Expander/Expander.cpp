@@ -67,35 +67,6 @@ void Expander::OnApplyTemplate()
 
 }
 
-void Expander::OnKeyDown(winrt::KeyRoutedEventArgs const& eventArgs)
-{
-    // This is to make sure that if there's nested expanders, we don't expand
-    // the parents.
-    if (eventArgs.Handled())
-    {
-        return;
-    }
-
-    if (eventArgs.Key() == winrt::VirtualKey::Space)
-    {
-        if (ExpanderProperties::IsExpanded())
-        {
-            // If it's currently expanded, we will collapse
-            ExpanderProperties::IsExpanded(false);
-        }
-        else
-        {
-            // If it's currently collapsed, we will expand
-            ExpanderProperties::IsExpanded(true);
-        }
-        // We handled it, make sure the parents don't expand/collapse
-        eventArgs.Handled(true);
-        return;
-    }
-
-    __super::OnKeyDown(eventArgs);
-}
-
 void Expander::RaiseExpandingEvent(const winrt::Expander& container)
 {
 }
