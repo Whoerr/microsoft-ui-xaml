@@ -23,7 +23,11 @@
                 <controls:Expander.Header>
                     <TextBlock Style="{StaticResource HeaderTextBlockStyle}" Text="This expander is expanded by default." />
                 </controls:Expander.Header>
-                <TextBlock>Content</TextBlock>
+                <StackPanel>
+                    <TextBlock>Content</TextBlock>
+                    <TextBlock>Content2</TextBlock>
+                    <TextBlock>Content3</TextBlock>
+                </StackPanel>
             </controls:Expander>
             
             <controls:Expander AutomationProperties.Name="Expander2" HorizontalContentAlignment="Left" IsExpanded="False">

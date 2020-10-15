@@ -70,6 +70,15 @@ void ExpanderAutomationPeer::Expand()
     }   
 }
 
+void ExpanderAutomationPeer::Collapse()
+{
+    if (auto const expander = Owner().try_as<winrt::Expander>())
+    {
+        expander.IsExpanded(false);
+        RaiseExpandCollapseAutomationEvent(winrt::ExpandCollapseState::Collapsed);
+    }
+}
+
 void ExpanderAutomationPeer::RaiseExpandCollapseAutomationEvent(winrt::ExpandCollapseState newState)
 {
     if (winrt::AutomationPeer::ListenerExists(winrt::AutomationEvents::PropertyChanged))
@@ -78,19 +87,10 @@ void ExpanderAutomationPeer::RaiseExpandCollapseAutomationEvent(winrt::ExpandCol
             winrt::ExpandCollapseState::Collapsed :
             winrt::ExpandCollapseState::Expanded;
 
-        // box_value(oldState) doesn't work here, use ReferenceWithABIRuntimeClassName to make Narrator unbox it.
+        // if box_value(oldState) doesn't work here, use ReferenceWithABIRuntimeClassName to make Narrator unbox it.
         RaisePropertyChangedEvent(winrt::ExpandCollapsePatternIdentifiers::ExpandCollapseStateProperty(),
             box_value(oldState),
             box_value(newState));
-    }
-}
-
-void ExpanderAutomationPeer::Collapse()
-{
-    if (auto const expander = Owner().try_as<winrt::Expander>())
-    {
-        expander.IsExpanded(false);
-        RaiseExpandCollapseAutomationEvent(winrt::ExpandCollapseState::Collapsed);
     }
 }
 
